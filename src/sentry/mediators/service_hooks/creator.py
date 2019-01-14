@@ -13,7 +13,7 @@ from sentry.models import ServiceHook
 # events - this maps those resource-centric values to the actual events
 # emitted.
 EVENT_EXPANSION = {
-    'issue': ['issue.created'],
+    'issue': ['issue.created', 'issue.resolved'],
 }
 
 

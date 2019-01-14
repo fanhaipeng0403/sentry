@@ -28,7 +28,10 @@ from sentry.models import (
 )
 from sentry.models.event import Event
 from sentry.receivers import DEFAULT_SAVED_SEARCHES
-from sentry.signals import advanced_search, issue_ignored, issue_resolved_in_release, issue_deleted, resolved_with_commit
+from sentry.signals import (
+    advanced_search, issue_ignored, issue_resolved, issue_resolved_in_release,
+    issue_deleted, resolved_with_commit,
+)
 from sentry.tasks.deletion import delete_groups
 from sentry.tasks.integrations import kick_off_status_syncs
 from sentry.tasks.merge import merge_groups
@@ -678,6 +681,13 @@ class ProjectGroupIndexEndpoint(ProjectEndpoint, EnvironmentMixin):
                         organization_id=group.project.organization_id,
                         user=request.user,
                         group=group,
+                        sender=type(self),
+                    )
+                else:
+                    issue_resolved.send_robust(
+                        project=project,
+                        group=group,
+                        user=acting_user,
                         sender=type(self),
                     )
 
