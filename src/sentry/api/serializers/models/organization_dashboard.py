@@ -13,9 +13,8 @@ class DashboardSerializer(Serializer):
             'id': six.text_type(obj.id),
             'title': obj.title,
             'organization': six.text_type(obj.organization.id),
-            'data': obj.data,
             'dateAdded': obj.date_added,
-            'created_by': obj.created_by.id,
+            'created_by': six.text_type(obj.created_by.id),
         }
 
         return data
