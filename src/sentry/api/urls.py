@@ -412,9 +412,9 @@ urlpatterns = patterns(
         name='sentry-api-0-organization-discover-saved-query-detail'
     ),
     url(
-        r'^organizations/(?P<organization_slug>[^\/]+)/dashboard/$',
+        r'^organizations/(?P<organization_slug>[^\/]+)/dashboards/$',
         OrganizationDashboardsEndpoint.as_view(),
-        name='sentry-api-0-organization-dashboard'
+        name='sentry-api-0-organization-dashboards'
     ),
     url(
         r'^organizations/(?P<organization_slug>[^\/]+)/health/top/$',
